@@ -1,6 +1,6 @@
-# Stormy Weather
+# Weather Me
 
-Stormy Weather is a simple weather app that tells the weather of a city through [weatherapi.com](https://www.weatherapi.com/)'s API.
+Weather Me is a simple weather app that tells the weather of a city through [weatherapi.com](https://www.weatherapi.com/)'s API.
 
 # Tech Stack
 
