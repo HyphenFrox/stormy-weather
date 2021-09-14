@@ -53,8 +53,11 @@ function App() {
       <Theme>
         <div className={classes.app}>
           <Typography variant="h1" align="center" style={{ fontSize: "3rem" }}>
-            Weather App
+            {fetchWeatherDataStatus === "success" && weatherData
+              ? `Weather in ${weatherData.location.name}`
+              : "Weather App"}
           </Typography>
+
           <div className={classes.filterSectionContainer}>
             <FilterSection
               locationValue={locationValue}
