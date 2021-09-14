@@ -17,6 +17,12 @@ const useStyles = makeStyles((theme) => ({
   formGroup: {
     padding: "1em",
   },
+  locationInput: {
+    minWidth: 200,
+    [theme.breakpoints.up("sm")]: {
+      minWidth: 300,
+    },
+  },
 }));
 
 function FilterSection(props) {
@@ -45,6 +51,7 @@ function FilterSection(props) {
   return (
     <Paper className={classes.formGroup}>
       <Autocomplete
+        className={classes.locationInput}
         inputValue={locationInputValue}
         onInputChange={handleLocationInputChange}
         value={locationValue}
@@ -55,7 +62,6 @@ function FilterSection(props) {
         getOptionSelected={(option, value) =>
           option.lat === value.lat && option.lon === value.lon
         }
-        style={{ minWidth: 200 }}
         renderInput={(params) => (
           <TextField
             {...params}
