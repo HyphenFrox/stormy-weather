@@ -18,8 +18,7 @@ const useStyles = makeStyles((theme) => ({
       marginTop: "1em",
     },
     [theme.breakpoints.up("sm")]: {
-      paddingLeft: "1em",
-      paddingRight: "1em",
+      padding: "2em 1em",
     },
   },
   filterSectionContainer: {
