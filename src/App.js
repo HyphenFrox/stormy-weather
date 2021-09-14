@@ -55,7 +55,7 @@ function App() {
     <>
       <Theme>
         <div className={classes.app}>
-          <Typography variant="h1" align="center" style={{ fontSize: "2rem" }}>
+          <Typography variant="h1" align="center" style={{ fontSize: "3rem" }}>
             Weather App
           </Typography>
           <div className={classes.filterSectionContainer}>
