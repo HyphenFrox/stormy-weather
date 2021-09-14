@@ -1,7 +1,8 @@
 {
-  "name": "weather-app",
+  "name": "stormy-weather",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://stormy-weather.netlify.app/",
   "dependencies": {
     "@material-ui/core": "^4.12.3",
     "@material-ui/lab": "^4.0.0-alpha.60",
