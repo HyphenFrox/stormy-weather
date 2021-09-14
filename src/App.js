@@ -64,7 +64,9 @@ function App() {
               handleLocationValueChange={handleLocationValueChange}
             ></FilterSection>
           </div>
-          {fetchWeatherDataStatus === "success" && <WeatherData></WeatherData>}
+          {fetchWeatherDataStatus === "success" && locationValue && (
+            <WeatherData></WeatherData>
+          )}
           {fetchWeatherDataStatus === "loading" && (
             <WeatherDataLoading></WeatherDataLoading>
           )}
