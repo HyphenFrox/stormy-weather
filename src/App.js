@@ -13,8 +13,6 @@ import WeatherData from "./components/WeatherData";
 
 const useStyles = makeStyles((theme) => ({
   app: {
-    width: "100vw",
-    height: "100vh",
     padding: "1em 0.5em 1em 0.5em",
     "& > * + *": {
       marginTop: "1em",
