@@ -66,6 +66,7 @@ function FilterSection(props) {
           <TextField
             {...params}
             label="City"
+            placeholder="eg. Berlin"
             name="city"
             InputProps={{
               ...params.InputProps,
