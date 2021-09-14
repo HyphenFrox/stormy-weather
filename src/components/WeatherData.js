@@ -46,6 +46,7 @@ function WeatherData(props) {
       <div className={classes.currentTempSection}>
         <img
           src={weatherData.current.condition.icon}
+          alt={weatherData.current.condition.text}
           className={classes.conditionIcon}
         ></img>
         <div className={classes.tempNumberSection}>
