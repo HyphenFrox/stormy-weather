@@ -6,12 +6,16 @@ import {
 } from "@material-ui/core";
 import React from "react";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   loadingPaper: {
     minHeight: 200,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    [theme.breakpoints.up("sm")]: {
+      maxWidth: "80%",
+      margin: "auto",
+    },
   },
   progressLoader: {
     display: "flex",
@@ -21,7 +25,7 @@ const useStyles = makeStyles({
       marginLeft: "1em",
     },
   },
-});
+}));
 
 function WeatherDataLoading() {
   const classes = useStyles();

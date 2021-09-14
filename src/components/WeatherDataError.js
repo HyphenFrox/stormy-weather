@@ -1,13 +1,17 @@
 import { makeStyles, Paper, Typography } from "@material-ui/core";
 import React from "react";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   rootPaper: {
     minHeight: 200,
     display: "flex",
     alignItems: "center",
+    [theme.breakpoints.up("sm")]: {
+      maxWidth: "80%",
+      margin: "auto",
+    },
   },
-});
+}));
 
 function WeatherDataError(props) {
   const { error } = props;
