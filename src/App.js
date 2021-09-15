@@ -9,6 +9,7 @@ import fetchWeatherData from "./services/fetchWeatherData";
 import WeatherDataLoading from "./components/WeatherDataLoading";
 import WeatherDataError from "./components/WeatherDataError";
 import WeatherData from "./components/WeatherData";
+import NoCitySelected from "./components/NoCitySelected";
 //
 
 const useStyles = makeStyles((theme) => ({
@@ -83,6 +84,7 @@ function App() {
           {fetchWeatherDataStatus === "error" && (
             <WeatherDataError error={fetchWeatherDataError}></WeatherDataError>
           )}
+          {!locationValue && <NoCitySelected></NoCitySelected>}
         </div>
       </Theme>
     </>
