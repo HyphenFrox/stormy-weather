@@ -55,6 +55,11 @@ function App() {
   };
   //
 
+  // unit
+  const [unit, setUnit] = useState("metric");
+  const handleUnitChange = (event) => setUnit(event.target.value);
+  //
+
   const classes = useStyles();
   return (
     <>
@@ -70,11 +75,14 @@ function App() {
             <FilterSection
               locationValue={locationValue}
               handleLocationValueChange={handleLocationValueChange}
+              unit={unit}
+              handleUnitChange={handleUnitChange}
             ></FilterSection>
           </div>
           {fetchWeatherDataStatus === "success" && locationValue && (
             <WeatherData
               weatherData={weatherData}
+              unit={unit}
               handleRefreshWeather={handleRefreshWeather}
             ></WeatherData>
           )}

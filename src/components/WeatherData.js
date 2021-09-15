@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function WeatherData(props) {
-  const { weatherData, handleRefreshWeather } = props;
+  const { weatherData, handleRefreshWeather, unit } = props;
   const classes = useStyles();
   return (
     <Paper className={classes.rootPaper}>
@@ -112,7 +112,9 @@ function WeatherData(props) {
         <div className={classes.flexJCCAIC}>
           <WiRain size={70} color={lightBlue["A200"]}></WiRain>
           <Typography variant="h4" style={{ fontSize: "2rem" }}>
-            Precipitation: {weatherData.current.precip_mm} mm
+            {unit === "metric"
+              ? `Precipitation: ${weatherData.current.precip_mm} mm`
+              : `Precipitation: ${weatherData.current.precip_in} inches`}
           </Typography>
         </div>
         <div className={classes.humiditySection}>
@@ -125,7 +127,9 @@ function WeatherData(props) {
           <div className={classes.flexJCCAIC}>
             <WiStrongWind size={70} color={lightBlue["A200"]}></WiStrongWind>
             <Typography variant="h4" style={{ fontSize: "2rem" }}>
-              {weatherData.current.wind_kph} KM/H
+              {unit === "metric"
+                ? `${weatherData.current.wind_kph} KM/H`
+                : `${weatherData.current.wind_mph} Miles/H`}
             </Typography>
           </div>
           <div className={classes.flexJCCAIC}>
@@ -145,7 +149,9 @@ function WeatherData(props) {
         <div className={classes.flexJCCAIC}>
           <WiFog size={70} color={lightBlue["A200"]}></WiFog>
           <Typography variant="h4" style={{ fontSize: "2rem" }}>
-            Visiblity: {weatherData.current.vis_km} KMs
+            {unit === "metric"
+              ? `Visiblity: ${weatherData.current.vis_km} KMs`
+              : `Visiblity: ${weatherData.current.vis_miles} Miles`}
           </Typography>
         </div>
       </div>
