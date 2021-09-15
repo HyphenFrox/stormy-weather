@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { makeStyles, Typography } from "@material-ui/core";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 
 //
 import Theme from "./components/Theme";
@@ -47,6 +47,13 @@ function App() {
   } = useQuery(["fetchWeatherData", locationValue], fetchWeatherData);
   //
 
+  // handle refresh weather
+  const queryClient = useQueryClient();
+  const handleRefreshWeather = () => {
+    queryClient.invalidateQueries(["fetchWeatherData", locationValue]);
+  };
+  //
+
   const classes = useStyles();
   return (
     <>
@@ -65,7 +72,10 @@ function App() {
             ></FilterSection>
           </div>
           {fetchWeatherDataStatus === "success" && locationValue && (
-            <WeatherData weatherData={weatherData}></WeatherData>
+            <WeatherData
+              weatherData={weatherData}
+              handleRefreshWeather={handleRefreshWeather}
+            ></WeatherData>
           )}
           {fetchWeatherDataStatus === "loading" && (
             <WeatherDataLoading></WeatherDataLoading>

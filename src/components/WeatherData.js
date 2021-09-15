@@ -1,4 +1,4 @@
-import { makeStyles, Paper, Typography } from "@material-ui/core";
+import { IconButton, makeStyles, Paper, Typography } from "@material-ui/core";
 import { lightBlue } from "@material-ui/core/colors";
 import React from "react";
 import {
@@ -10,21 +10,29 @@ import {
   WiDaySunny,
   WiFog,
 } from "weather-icons-react";
+import RefreshIcon from "@material-ui/icons/Refresh";
 
 const useStyles = makeStyles((theme) => ({
   rootPaper: {
     minHeight: 200,
+    padding: "2em",
+    [theme.breakpoints.up("sm")]: {
+      maxWidth: "80%",
+      margin: "auto",
+    },
+  },
+  refreshIconContainer: {
+    display: "flex",
+    justifyContent: "flex-end",
+    alignItems: "center",
+  },
+  currentWeatherSection: {
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
     alignItems: "stretch",
-    padding: "2em",
     "& > *": {
       margin: "1em",
-    },
-    [theme.breakpoints.up("sm")]: {
-      maxWidth: "80%",
-      margin: "auto",
     },
   },
   currentTempSection: {
@@ -65,72 +73,82 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function WeatherData(props) {
-  const { weatherData } = props;
+  const { weatherData, handleRefreshWeather } = props;
   const classes = useStyles();
   return (
     <Paper className={classes.rootPaper}>
-      <div className={classes.currentTempSection}>
-        <Typography
-          variant="h4"
-          align="center"
-          style={{ fontSize: "2.5rem", margin: "auto" }}
-        >
-          {weatherData.current.condition.text}
-        </Typography>
-        <img
-          src={weatherData.current.condition.icon}
-          alt={weatherData.current.condition.text}
-          className={classes.conditionIcon}
-        ></img>
-        <Typography variant="h4" style={{ fontSize: "2.5rem", margin: "auto" }}>
-          {weatherData.current.temp_c}
-          <sup>o</sup>C
-        </Typography>
+      <div className={classes.refreshIconContainer}>
+        <IconButton color="primary" onClick={handleRefreshWeather}>
+          <RefreshIcon></RefreshIcon>
+        </IconButton>
       </div>
-      <div className={classes.flexJCCAIC}>
-        <WiCloudy size={70} color={lightBlue["A200"]}></WiCloudy>
-        <Typography variant="h4" style={{ fontSize: "2rem" }}>
-          Cloud: {weatherData.current.cloud}%
-        </Typography>
-      </div>
-      <div className={classes.flexJCCAIC}>
-        <WiRain size={70} color={lightBlue["A200"]}></WiRain>
-        <Typography variant="h4" style={{ fontSize: "2rem" }}>
-          Precipitation: {weatherData.current.precip_mm} mm
-        </Typography>
-      </div>
-      <div className={classes.humiditySection}>
-        <WiHumidity size={70} color={lightBlue["A200"]}></WiHumidity>
-        <Typography variant="h4" style={{ fontSize: "2rem" }}>
-          Humidity: {weatherData.current.humidity}
-        </Typography>
-      </div>
-      <div className={classes.windSection}>
-        <div className={classes.flexJCCAIC}>
-          <WiStrongWind size={70} color={lightBlue["A200"]}></WiStrongWind>
-          <Typography variant="h4" style={{ fontSize: "2rem" }}>
-            {weatherData.current.wind_kph} KM/H
+      <div className={classes.currentWeatherSection}>
+        <div className={classes.currentTempSection}>
+          <Typography
+            variant="h4"
+            align="center"
+            style={{ fontSize: "2.5rem", margin: "auto" }}
+          >
+            {weatherData.current.condition.text}
+          </Typography>
+          <img
+            src={weatherData.current.condition.icon}
+            alt={weatherData.current.condition.text}
+            className={classes.conditionIcon}
+          ></img>
+          <Typography
+            variant="h4"
+            style={{ fontSize: "2.5rem", margin: "auto" }}
+          >
+            {weatherData.current.temp_c}
+            <sup>o</sup>C
           </Typography>
         </div>
         <div className={classes.flexJCCAIC}>
-          <WiWindDeg size={50} color={lightBlue["A200"]}></WiWindDeg>
+          <WiCloudy size={70} color={lightBlue["A200"]}></WiCloudy>
           <Typography variant="h4" style={{ fontSize: "2rem" }}>
-            {weatherData.current.wind_degree} <sup>o</sup>
-            {weatherData.current.wind_dir}
+            Cloud: {weatherData.current.cloud}%
           </Typography>
         </div>
-      </div>
-      <div className={classes.flexJCCAIC}>
-        <WiDaySunny size={70} color={lightBlue["A200"]}></WiDaySunny>
-        <Typography variant="h4" style={{ fontSize: "2rem" }}>
-          UV Index: {weatherData.current.uv}
-        </Typography>
-      </div>
-      <div className={classes.flexJCCAIC}>
-        <WiFog size={70} color={lightBlue["A200"]}></WiFog>
-        <Typography variant="h4" style={{ fontSize: "2rem" }}>
-          Visiblity: {weatherData.current.vis_km} KMs
-        </Typography>
+        <div className={classes.flexJCCAIC}>
+          <WiRain size={70} color={lightBlue["A200"]}></WiRain>
+          <Typography variant="h4" style={{ fontSize: "2rem" }}>
+            Precipitation: {weatherData.current.precip_mm} mm
+          </Typography>
+        </div>
+        <div className={classes.humiditySection}>
+          <WiHumidity size={70} color={lightBlue["A200"]}></WiHumidity>
+          <Typography variant="h4" style={{ fontSize: "2rem" }}>
+            Humidity: {weatherData.current.humidity}
+          </Typography>
+        </div>
+        <div className={classes.windSection}>
+          <div className={classes.flexJCCAIC}>
+            <WiStrongWind size={70} color={lightBlue["A200"]}></WiStrongWind>
+            <Typography variant="h4" style={{ fontSize: "2rem" }}>
+              {weatherData.current.wind_kph} KM/H
+            </Typography>
+          </div>
+          <div className={classes.flexJCCAIC}>
+            <WiWindDeg size={50} color={lightBlue["A200"]}></WiWindDeg>
+            <Typography variant="h4" style={{ fontSize: "2rem" }}>
+              {weatherData.current.wind_degree} <sup>o</sup>
+              {weatherData.current.wind_dir}
+            </Typography>
+          </div>
+        </div>
+        <div className={classes.flexJCCAIC}>
+          <WiDaySunny size={70} color={lightBlue["A200"]}></WiDaySunny>
+          <Typography variant="h4" style={{ fontSize: "2rem" }}>
+            UV Index: {weatherData.current.uv}
+          </Typography>
+        </div>
+        <div className={classes.flexJCCAIC}>
+          <WiFog size={70} color={lightBlue["A200"]}></WiFog>
+          <Typography variant="h4" style={{ fontSize: "2rem" }}>
+            Visiblity: {weatherData.current.vis_km} KMs
+          </Typography>
+        </div>
       </div>
     </Paper>
   );
