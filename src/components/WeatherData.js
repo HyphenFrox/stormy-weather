@@ -14,7 +14,6 @@ import RefreshIcon from "@material-ui/icons/Refresh";
 
 const useStyles = makeStyles((theme) => ({
   rootPaper: {
-    minHeight: 200,
     padding: "2em",
     [theme.breakpoints.up("sm")]: {
       maxWidth: "80%",
