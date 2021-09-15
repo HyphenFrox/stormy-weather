@@ -80,6 +80,9 @@ function WeatherData(props) {
         <IconButton color="primary" onClick={handleRefreshWeather}>
           <RefreshIcon></RefreshIcon>
         </IconButton>
+        <Typography variant="h4" style={{ fontSize: "1rem" }}>
+          Refresh Weather
+        </Typography>
       </div>
       <div className={classes.currentWeatherSection}>
         <div className={classes.currentTempSection}>
