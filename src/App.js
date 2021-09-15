@@ -36,7 +36,10 @@ function App() {
   const [locationValue, setLocationValue] = useState(null);
   const handleLocationValueChange = (...args) => {
     const [, newValue] = args;
-    setLocationValue(newValue);
+    setLocationValue({
+      type: "select",
+      value: newValue,
+    });
   };
   //
 
@@ -60,6 +63,22 @@ function App() {
   const handleUnitChange = (event) => setUnit(event.target.value);
   //
 
+  // nearby weather
+  const [isNearbyWeatherOn, setIsNearbyWheatherOn] = useState(false);
+  const handleIsNearbyWeatherOnChange = (event) => {
+    if (event.target.checked === true && "geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setLocationValue({ type: "geoLocation", value: position.coords });
+        setIsNearbyWheatherOn(true);
+      });
+    }
+    if (event.target.checked === false) {
+      setLocationValue(null);
+      setIsNearbyWheatherOn(false);
+    }
+  };
+  //
+
   const classes = useStyles();
   return (
     <>
@@ -77,6 +96,8 @@ function App() {
               handleLocationValueChange={handleLocationValueChange}
               unit={unit}
               handleUnitChange={handleUnitChange}
+              isNearbyWeatherOn={isNearbyWeatherOn}
+              handleIsNearbyWeatherOnChange={handleIsNearbyWeatherOnChange}
             ></FilterSection>
           </div>
           {fetchWeatherDataStatus === "success" && locationValue && (

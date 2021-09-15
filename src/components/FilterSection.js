@@ -8,6 +8,8 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  FormControlLabel,
+  Switch,
 } from "@material-ui/core";
 import React from "react";
 import { useState } from "react";
@@ -36,8 +38,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function FilterSection(props) {
-  const { locationValue, handleLocationValueChange, unit, handleUnitChange } =
-    props;
+  const {
+    locationValue,
+    handleLocationValueChange,
+    unit,
+    handleUnitChange,
+    isNearbyWeatherOn,
+    handleIsNearbyWeatherOnChange,
+  } = props;
 
   // filter input state
   const [locationInputValue, setLocationInputValue] = useState("");
@@ -64,9 +72,10 @@ function FilterSection(props) {
       <FormGroup className={classes.formGroup} row>
         <Autocomplete
           className={classes.locationInput}
+          disabled={isNearbyWeatherOn}
           inputValue={locationInputValue}
           onInputChange={handleLocationInputChange}
-          value={locationValue}
+          value={locationValue?.type === "select" ? locationValue.value : null}
           onChange={handleLocationValueChange}
           options={fetchLocationStatus === "success" ? locationResults : []}
           loading={fetchLocationStatus === "loading"}
@@ -106,6 +115,17 @@ function FilterSection(props) {
             <MenuItem value={"imperial"}>Imperial</MenuItem>
           </Select>
         </FormControl>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={isNearbyWeatherOn}
+              onChange={handleIsNearbyWeatherOnChange}
+              name="nearbyWeather"
+              color="primary"
+            />
+          }
+          label="Nearby Weather"
+        />
       </FormGroup>
     </Paper>
   );
