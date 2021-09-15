@@ -119,7 +119,7 @@ function WeatherData(props) {
         <div className={classes.humiditySection}>
           <WiHumidity size={70} color={lightBlue["A200"]}></WiHumidity>
           <Typography variant="h4" style={{ fontSize: "2rem" }}>
-            Humidity: {weatherData.current.humidity}
+            Humidity: {weatherData.current.humidity}%
           </Typography>
         </div>
         <div className={classes.windSection}>
