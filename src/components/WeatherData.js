@@ -34,22 +34,9 @@ const useStyles = makeStyles((theme) => ({
       margin: "1em",
     },
   },
-  currentTempSection: {
-    display: "flex",
-    alignContent: "center",
-    alignItems: "stretch",
-  },
   conditionIcon: {
     width: 100,
     height: 100,
-    margin: "auto",
-  },
-  tempNumberSection: {
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
   },
   windSection: {
     display: "flex",
@@ -85,27 +72,18 @@ function WeatherData(props) {
         </Typography>
       </div>
       <div className={classes.currentWeatherSection}>
-        <div className={classes.currentTempSection}>
-          <Typography
-            variant="h4"
-            align="center"
-            style={{ fontSize: "2.5rem", margin: "auto" }}
-          >
-            {weatherData.current.condition.text}
-          </Typography>
-          <img
-            src={weatherData.current.condition.icon}
-            alt={weatherData.current.condition.text}
-            className={classes.conditionIcon}
-          ></img>
-          <Typography
-            variant="h4"
-            style={{ fontSize: "2.5rem", margin: "auto" }}
-          >
-            {weatherData.current.temp_c}
-            <sup>o</sup>C
-          </Typography>
-        </div>
+        <Typography variant="h4" align="center" style={{ fontSize: "2.5rem" }}>
+          {weatherData.current.condition.text}
+        </Typography>
+        <img
+          src={weatherData.current.condition.icon}
+          alt={weatherData.current.condition.text}
+          className={classes.conditionIcon}
+        ></img>
+        <Typography variant="h4" style={{ fontSize: "2.5rem" }}>
+          {weatherData.current.temp_c}
+          <sup>o</sup>C
+        </Typography>
         <div className={classes.flexJCCAIC}>
           <WiCloudy size={70} color={lightBlue["A200"]}></WiCloudy>
           <Typography variant="h4" style={{ fontSize: "2rem" }}>
