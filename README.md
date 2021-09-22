@@ -1,6 +1,6 @@
-# Weather Me
+# Weather Nemo
 
-Weather Me is a simple weather app that tells the weather of a city through [weatherapi.com](https://www.weatherapi.com/)'s API.
+Weather Nemo is a simple weather app that tells the weather of a city through [weatherapi.com](https://www.weatherapi.com/)'s API.
 
 # Tech Stack
 
