@@ -21,6 +21,7 @@ const useStyles = makeStyles({
   refreshIconContainer: {
     flexGrow: 1,
     justifyContent: "flex-end",
+    marginBottom: "1em",
   },
   conditionIcon: {
     width: 100,
@@ -33,7 +34,8 @@ function WeatherData(props) {
   const classes = useStyles();
   const flexbox = useFlexbox();
   return (
-    <div className={flexbox.flexboxRowWrap}>
+    <div>
+      {/* refresh icon box */}
       <div
         className={classNames(flexbox.flexboxRow, classes.refreshIconContainer)}
       >
@@ -44,7 +46,10 @@ function WeatherData(props) {
           Refresh Weather
         </Typography>
       </div>
-      <div className={flexbox.flexboxColumn}>
+      {/*  */}
+
+      {/* current weather section */}
+      <div className={flexbox.flexboxRowWrap}>
         <Typography variant="h4" align="center" style={{ fontSize: "2.5rem" }}>
           {weatherData.current.condition.text}
         </Typography>
@@ -109,6 +114,7 @@ function WeatherData(props) {
           </Typography>
         </div>
       </div>
+      {/*  */}
     </div>
   );
 }
