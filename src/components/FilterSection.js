@@ -21,19 +21,11 @@ import fetchLocation from "../services/fetchLocation";
 //
 
 const useStyles = makeStyles((theme) => ({
-  formGroup: {
-    "& > *": {
-      margin: "1em",
-    },
-  },
   locationInput: {
     minWidth: 200,
     [theme.breakpoints.up("sm")]: {
       minWidth: 300,
     },
-  },
-  unitSelect: {
-    minWidth: 50,
   },
 }));
 
@@ -68,8 +60,8 @@ function FilterSection(props) {
   const classes = useStyles();
 
   return (
-    <Paper>
-      <FormGroup className={classes.formGroup} row>
+    <Paper style={{ padding: "1em" }}>
+      <FormGroup row style={{ gap: "1em" }}>
         <Autocomplete
           className={classes.locationInput}
           disabled={isNearbyWeatherOn}
@@ -103,7 +95,7 @@ function FilterSection(props) {
             />
           )}
         />
-        <FormControl className={classes.unitSelect}>
+        <FormControl style={{ minWidth: 50 }}>
           <InputLabel id="unit-select-label">Unit</InputLabel>
           <Select
             labelId="unit-select-label"

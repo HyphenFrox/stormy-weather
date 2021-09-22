@@ -3,7 +3,7 @@ import axios from "axios";
 export default async function fetchWeatherData({ queryKey }) {
   const [, locationObject] = queryKey;
 
-  if (locationObject) {
+  if (locationObject?.value) {
     let url = ``;
 
     if (locationObject.type === "select") {

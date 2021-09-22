@@ -1,4 +1,4 @@
-import { IconButton, makeStyles, Paper, Typography } from "@material-ui/core";
+import { IconButton, makeStyles, Typography } from "@material-ui/core";
 import { lightBlue } from "@material-ui/core/colors";
 import React from "react";
 import {
@@ -11,59 +11,32 @@ import {
   WiFog,
 } from "weather-icons-react";
 import RefreshIcon from "@material-ui/icons/Refresh";
+import classNames from "classnames";
 
-const useStyles = makeStyles((theme) => ({
-  rootPaper: {
-    padding: "2em",
-    [theme.breakpoints.up("sm")]: {
-      maxWidth: "80%",
-      margin: "auto",
-    },
-  },
+//
+import useFlexbox from "../services/useFlexbox";
+//
+
+const useStyles = makeStyles({
   refreshIconContainer: {
-    display: "flex",
+    flexGrow: 1,
     justifyContent: "flex-end",
-    alignItems: "center",
-  },
-  currentWeatherSection: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    alignItems: "stretch",
-    "& > *": {
-      margin: "1em",
-    },
   },
   conditionIcon: {
     width: 100,
     height: 100,
   },
-  windSection: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    "& > * + *": {
-      marginLeft: "0.5em",
-    },
-  },
-  flexJCCAIC: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  humiditySection: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-}));
+});
 
 function WeatherData(props) {
   const { weatherData, handleRefreshWeather, unit } = props;
   const classes = useStyles();
+  const flexbox = useFlexbox();
   return (
-    <Paper className={classes.rootPaper}>
-      <div className={classes.refreshIconContainer}>
+    <div className={flexbox.flexboxRowWrap}>
+      <div
+        className={classNames(flexbox.flexboxRow, classes.refreshIconContainer)}
+      >
         <IconButton color="primary" onClick={handleRefreshWeather}>
           <RefreshIcon></RefreshIcon>
         </IconButton>
@@ -71,7 +44,7 @@ function WeatherData(props) {
           Refresh Weather
         </Typography>
       </div>
-      <div className={classes.currentWeatherSection}>
+      <div className={flexbox.flexboxColumn}>
         <Typography variant="h4" align="center" style={{ fontSize: "2.5rem" }}>
           {weatherData.current.condition.text}
         </Typography>
@@ -84,13 +57,13 @@ function WeatherData(props) {
           {weatherData.current.temp_c}
           <sup>o</sup>C
         </Typography>
-        <div className={classes.flexJCCAIC}>
+        <div className={flexbox.flexboxRow}>
           <WiCloudy size={70} color={lightBlue["A200"]}></WiCloudy>
           <Typography variant="h4" style={{ fontSize: "2rem" }}>
             Cloud: {weatherData.current.cloud}%
           </Typography>
         </div>
-        <div className={classes.flexJCCAIC}>
+        <div className={flexbox.flexboxRow}>
           <WiRain size={70} color={lightBlue["A200"]}></WiRain>
           <Typography variant="h4" style={{ fontSize: "2rem" }}>
             {unit === "metric"
@@ -98,14 +71,14 @@ function WeatherData(props) {
               : `Precipitation: ${weatherData.current.precip_in} inches`}
           </Typography>
         </div>
-        <div className={classes.humiditySection}>
+        <div className={flexbox.flexboxRow}>
           <WiHumidity size={70} color={lightBlue["A200"]}></WiHumidity>
           <Typography variant="h4" style={{ fontSize: "2rem" }}>
             Humidity: {weatherData.current.humidity}%
           </Typography>
         </div>
-        <div className={classes.windSection}>
-          <div className={classes.flexJCCAIC}>
+        <div className={flexbox.flexboxRow}>
+          <div className={flexbox.flexboxRow}>
             <WiStrongWind size={70} color={lightBlue["A200"]}></WiStrongWind>
             <Typography variant="h4" style={{ fontSize: "2rem" }}>
               {unit === "metric"
@@ -113,7 +86,7 @@ function WeatherData(props) {
                 : `${weatherData.current.wind_mph} Miles/H`}
             </Typography>
           </div>
-          <div className={classes.flexJCCAIC}>
+          <div className={flexbox.flexboxRow}>
             <WiWindDeg size={50} color={lightBlue["A200"]}></WiWindDeg>
             <Typography variant="h4" style={{ fontSize: "2rem" }}>
               {weatherData.current.wind_degree} <sup>o</sup>
@@ -121,13 +94,13 @@ function WeatherData(props) {
             </Typography>
           </div>
         </div>
-        <div className={classes.flexJCCAIC}>
+        <div className={flexbox.flexboxRow}>
           <WiDaySunny size={70} color={lightBlue["A200"]}></WiDaySunny>
           <Typography variant="h4" style={{ fontSize: "2rem" }}>
             UV Index: {weatherData.current.uv}
           </Typography>
         </div>
-        <div className={classes.flexJCCAIC}>
+        <div className={flexbox.flexboxRow}>
           <WiFog size={70} color={lightBlue["A200"]}></WiFog>
           <Typography variant="h4" style={{ fontSize: "2rem" }}>
             {unit === "metric"
@@ -136,7 +109,7 @@ function WeatherData(props) {
           </Typography>
         </div>
       </div>
-    </Paper>
+    </div>
   );
 }
 

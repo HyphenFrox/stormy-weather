@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { makeStyles, Typography } from "@material-ui/core";
+import { makeStyles, Typography, Paper } from "@material-ui/core";
 import { useQueryClient, useQuery } from "react-query";
 
 //
@@ -9,24 +9,24 @@ import WeatherDataLoading from "../components/WeatherDataLoading";
 import WeatherDataError from "../components/WeatherDataError";
 import WeatherData from "../components/WeatherData";
 import NoCitySelected from "../components/NoCitySelected";
+import useFlexbox from "../services/useFlexbox";
+import classNames from "classnames";
 //
 
 const useStyles = makeStyles((theme) => ({
   app: {
+    minHeight: "100%",
     padding: "1em 0.5em 1em 0.5em",
-    "& > * + *": {
-      marginTop: "1em",
-    },
-    [theme.breakpoints.up("sm")]: {
-      padding: "2em 1em",
-    },
   },
   filterSectionContainer: {
-    width: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignContent: "center",
+    marginTop: "1.5em",
+  },
+  content: {
+    minHeight: 200,
     padding: "1em",
+    [theme.breakpoints.up("sm")]: {
+      maxWidth: "80%",
+    },
   },
 }));
 
@@ -79,16 +79,22 @@ function Homepage() {
   //
 
   const classes = useStyles();
+  const flexbox = useFlexbox();
   return (
     <>
-      <div className={classes.app}>
+      <div className={classNames(flexbox.flexboxColumn, classes.app)}>
         <Typography variant="h1" align="center" style={{ fontSize: "3rem" }}>
           {fetchWeatherDataStatus === "success" && weatherData
             ? `Weather in ${weatherData.location.name}`
             : "Weather App"}
         </Typography>
 
-        <div className={classes.filterSectionContainer}>
+        <div
+          className={classNames(
+            flexbox.flexboxRow,
+            classes.filterSectionContainer
+          )}
+        >
           <FilterSection
             locationValue={locationValue}
             handleLocationValueChange={handleLocationValueChange}
@@ -98,20 +104,22 @@ function Homepage() {
             handleIsNearbyWeatherOnChange={handleIsNearbyWeatherOnChange}
           ></FilterSection>
         </div>
-        {fetchWeatherDataStatus === "success" && locationValue && (
-          <WeatherData
-            weatherData={weatherData}
-            unit={unit}
-            handleRefreshWeather={handleRefreshWeather}
-          ></WeatherData>
-        )}
-        {fetchWeatherDataStatus === "loading" && (
-          <WeatherDataLoading></WeatherDataLoading>
-        )}
-        {fetchWeatherDataStatus === "error" && (
-          <WeatherDataError error={fetchWeatherDataError}></WeatherDataError>
-        )}
-        {!locationValue && <NoCitySelected></NoCitySelected>}
+
+        <Paper className={classNames(flexbox.flexboxColumn, classes.content)}>
+          {fetchWeatherDataStatus === "success" && weatherData ? (
+            <WeatherData
+              weatherData={weatherData}
+              unit={unit}
+              handleRefreshWeather={handleRefreshWeather}
+            ></WeatherData>
+          ) : fetchWeatherDataStatus === "loading" ? (
+            <WeatherDataLoading></WeatherDataLoading>
+          ) : fetchWeatherDataStatus === "error" ? (
+            <WeatherDataError error={fetchWeatherDataError}></WeatherDataError>
+          ) : !locationValue?.value ? (
+            <NoCitySelected></NoCitySelected>
+          ) : null}
+        </Paper>
       </div>
     </>
   );
